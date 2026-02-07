@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cumulus Website
+
+A modern, professional business website built with Next.js, React, TypeScript, and Tailwind CSS.
+
+## Features
+
+- ✨ Modern and responsive design
+- 🚀 Fast performance with Next.js 16+
+- 💻 TypeScript for type safety
+- 🎨 Tailwind CSS for styling
+- 📱 Mobile-first responsive layout
+- ⚡ Optimized for conversions
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18+ and npm installed
+
+### Installation
+
+1. Navigate to the project directory:
+```bash
+cd cumulus-site
+```
+
+2. Install dependencies (already done):
+```bash
+npm install
+```
+
+### Development
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) (or the port shown) with your browser to see the website.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The site auto-updates as you edit files in the `src/` directory.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Build for Production
+
+Build the project for production:
+
+```bash
+npm run build
+```
+
+Start the production server:
+
+```bash
+npm start
+```
+
+### Linting
+
+Run ESLint to check code quality:
+
+```bash
+npm run lint
+```
+
+## Project Structure
+
+```
+cumulus-site/
+├── src/
+│   ├── app/
+│   │   ├── page.tsx          # Home page
+│   │   ├── layout.tsx         # Root layout
+│   │   └── globals.css        # Global styles
+│   └── components/            # Reusable components
+├── public/                    # Static assets
+├── tailwind.config.ts         # Tailwind CSS configuration
+├── tsconfig.json              # TypeScript configuration
+└── package.json               # Dependencies and scripts
+```
+
+## Customization
+
+Edit the following files to customize your website:
+
+- `src/app/page.tsx` - Homepage content and layout
+- `tailwind.config.ts` - Change colors, fonts, and other design tokens
+- `src/app/layout.tsx` - Update metadata and global layout
+
+## Deployment
+
+The easiest way to deploy is on [Vercel](https://vercel.com):
+
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Vercel will automatically build and deploy
+
+Or deploy manually to any hosting provider that supports Node.js.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [React Documentation](https://react.dev)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
