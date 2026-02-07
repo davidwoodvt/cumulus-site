@@ -1,7 +1,94 @@
+import React from 'react';
+
+// Animated cloud background component
+function CloudBackground() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Animated SVG Clouds */}
+      <svg className="absolute w-full h-full" viewBox="0 0 1200 600" preserveAspectRatio="none">
+        <defs>
+          <filter id="cloudGlow">
+            <feGaussianBlur stdDeviation="2" />
+            <feComponentTransfer>
+              <feFuncA type="linear" slope="0.3"/>
+            </feComponentTransfer>
+          </filter>
+          <style>{`
+            @keyframes drift1 { 0%, 100% { transform: translateX(0px); } 50% { transform: translateX(30px); } }
+            @keyframes drift2 { 0%, 100% { transform: translateX(0px); } 50% { transform: translateX(-40px); } }
+            @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(15px); } }
+            .cloud1 { animation: drift1 20s ease-in-out infinite, float 8s ease-in-out infinite; }
+            .cloud2 { animation: drift2 25s ease-in-out infinite, float 10s ease-in-out infinite 2s; }
+          `}</style>
+        </defs>
+        
+        {/* Top clouds */}
+        <g className="cloud1" opacity="0.15">
+          <ellipse cx="200" cy="100" rx="80" ry="40" fill="#60a5fa"/>
+          <ellipse cx="260" cy="90" rx="90" ry="45" fill="#60a5fa"/>
+          <ellipse cx="140" cy="95" rx="70" ry="35" fill="#60a5fa"/>
+        </g>
+        
+        <g className="cloud2" opacity="0.12">
+          <ellipse cx="800" cy="150" rx="100" ry="50" fill="#06b6d4"/>
+          <ellipse cx="880" cy="140" rx="110" ry="55" fill="#06b6d4"/>
+          <ellipse cx="720" cy="145" rx="85" ry="40" fill="#06b6d4"/>
+        </g>
+
+        {/* Mid-level clouds */}
+        <g className="cloud1" opacity="0.2">
+          <ellipse cx="100" cy="300" rx="90" ry="45" fill="#0284c7"/>
+          <ellipse cx="180" cy="290" rx="100" ry="50" fill="#0284c7"/>
+          <ellipse cx="20" cy="295" rx="75" ry="38" fill="#0284c7"/>
+        </g>
+
+        <g className="cloud2" opacity="0.18">
+          <ellipse cx="900" cy="350" rx="95" ry="48" fill="#0ea5e9"/>
+          <ellipse cx="990" cy="340" rx="105" ry="52" fill="#0ea5e9"/>
+          <ellipse cx="820" cy="345" rx="80" ry="40" fill="#0ea5e9"/>
+        </g>
+      </svg>
+
+      {/* Drug development simulation particles */}
+      <div className="absolute inset-0">
+        {[...Array(15)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full blur-sm"
+            style={{
+              width: Math.random() * 4 + 2 + 'px',
+              height: Math.random() * 4 + 2 + 'px',
+              left: Math.random() * 100 + '%',
+              top: Math.random() * 100 + '%',
+              background: `hsl(${180 + Math.random() * 60}, 100%, 50%)`,
+              animation: `moleculeMove ${Math.random() * 8 + 12}s ease-in infinite`,
+              animationDelay: `${Math.random() * 5}s`,
+              opacity: 0,
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
-      {/* Header */}
+    <main className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        @keyframes moleculeMove {
+          0% { transform: translate(0, 0) scale(1); opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { transform: translate(100px, -150px) scale(0.8); opacity: 0; }
+        }
+      `}</style>
+      <CloudBackground />
+      <div className="relative z-10">
       <header className="sticky top-0 z-50 bg-slate-900/80 backdrop-blur border-b border-slate-700">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
@@ -11,11 +98,7 @@ export default function Home() {
           <ul className="hidden md:flex gap-8">
             <li><a href="#capabilities" className="text-slate-300 hover:text-white transition">Capabilities</a></li>
             <li><a href="#partners" className="text-slate-300 hover:text-white transition">For Partners</a></li>
-            <li><a href="#about" className="text-slate-300 hover:text-white transition">About</a></li>
           </ul>
-          <button className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-2 rounded-lg hover:from-blue-600 hover:to-cyan-600 transition font-medium">
-            Contact
-          </button>
         </nav>
       </header>
 
@@ -132,7 +215,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-slate-950 border-t border-slate-800 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
               <h3 className="text-xl font-bold text-white mb-4">Cumulus</h3>
               <p className="text-slate-400">AI-enabled biotech accelerating drug discovery.</p>
@@ -141,24 +224,12 @@ export default function Home() {
               <h4 className="font-bold text-white mb-4">Product</h4>
               <ul className="text-slate-400 space-y-2">
                 <li><a href="#" className="hover:text-white transition">Platform</a></li>
-                <li><a href="#" className="hover:text-white transition">Capabilities</a></li>
-                <li><a href="#" className="hover:text-white transition">Demo</a></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold text-white mb-4">Company</h4>
               <ul className="text-slate-400 space-y-2">
-                <li><a href="#" className="hover:text-white transition">About</a></li>
                 <li><a href="#" className="hover:text-white transition">Team</a></li>
-                <li><a href="#" className="hover:text-white transition">Careers</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-white mb-4">Legal</h4>
-              <ul className="text-slate-400 space-y-2">
-                <li><a href="#" className="hover:text-white transition">Privacy</a></li>
-                <li><a href="#" className="hover:text-white transition">Terms</a></li>
-                <li><a href="#" className="hover:text-white transition">Contact</a></li>
               </ul>
             </div>
           </div>
@@ -169,6 +240,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      </div>
     </main>
   );
 }
