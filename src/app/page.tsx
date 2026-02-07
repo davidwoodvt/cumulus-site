@@ -267,9 +267,9 @@ export default function Home() {
               icon: "molecule"
             }
           ].map((capability, i) => (
-            <div key={i} className="group bg-gradient-to-br from-slate-800/60 to-slate-900/60 p-8 rounded-xl border border-slate-700 hover:border-blue-500/50 transition overflow-hidden relative backdrop-blur\">
+            <div key={i} className="group bg-gradient-to-br from-slate-800/60 to-slate-900/60 p-8 rounded-xl border border-slate-700 hover:border-blue-500/50 transition overflow-hidden relative backdrop-blur">
               {/* Icon area */}
-              <div className=\"h-32 mb-6 rounded-lg bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-500/20 p-4 flex items-center justify-center\">
+              <div className="h-32 mb-6 rounded-lg bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-500/20 p-4 flex items-center justify-center">
                 {capability.icon === 'molecule' && <MoleculeVisualization />}
                 {capability.icon === 'compound' && <CompoundVisualization />}
                 {capability.icon === 'antibody' && <AntibodyVisualization />}
@@ -296,14 +296,14 @@ export default function Home() {
               { title: "Enterprise Scale", desc: "Built for large-scale operations and complex R&D portfolios", icon: "compound" },
               { title: "Confidential", desc: "Secure, private infrastructure for sensitive research data", icon: "antibody" }
             ].map((item, i) => (
-              <div key={i} className="group p-6 rounded-xl bg-gradient-to-br from-slate-700/40 to-slate-800/40 border border-slate-600/50 hover:border-blue-500/50 transition backdrop-blur text-center\">
-                <div className=\"h-24 mb-4 rounded-lg bg-gradient-to-br from-green-900/20 to-emerald-900/20 p-3 flex items-center justify-center\">
+              <div key={i} className="group p-6 rounded-xl bg-gradient-to-br from-slate-700/40 to-slate-800/40 border border-slate-600/50 hover:border-blue-500/50 transition backdrop-blur text-center">
+                <div className="h-24 mb-4 rounded-lg bg-gradient-to-br from-green-900/20 to-emerald-900/20 p-3 flex items-center justify-center">
                   {item.icon === 'molecule' && <MoleculeVisualization />}
                   {item.icon === 'compound' && <CompoundVisualization />}
                   {item.icon === 'antibody' && <AntibodyVisualization />}
                 </div>
-                <h3 className=\"text-lg font-semibold text-white mb-3\">{item.title}</h3>
-                <p className=\"text-slate-400\">{item.desc}</p>
+                <h3 className="text-lg font-semibold text-white mb-3">{item.title}</h3>
+                <p className="text-slate-400">{item.desc}</p>
               </div>
             ))}
           </div>
