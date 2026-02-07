@@ -1,116 +1,78 @@
 import React from 'react';
 
-// Molecular structure visualization
-function MoleculeVisualization({ className = "" }) {
+// Simple molecule visualization with glowing atoms
+function MoleculeVisualization() {
   return (
-    <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`}>
-      {/* Glowing molecules */}
-      <defs>
-        <radialGradient id="glowGreen" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#4ade80" stopOpacity="0.8" />
-          <stop offset="100%" stopColor="#22c55e" stopOpacity="0.2" />
-        </radialGradient>
-        <radialGradient id="glowCyan" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.8" />
-          <stop offset="100%" stopColor="#0891b2" stopOpacity="0.2" />
-        </radialGradient>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-          <feMerge>
-            <feMergeNode in="coloredBlur"/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
-        </filter>
-      </defs>
-      
-      {/* Molecular bonds */}
-      <line x1="50" y1="50" x2="150" y2="100" stroke="#60a5fa" strokeWidth="2" opacity="0.6"/>
-      <line x1="150" y1="100" x2="120" y2="170" stroke="#06b6d4" strokeWidth="2" opacity="0.6"/>
-      <line x1="50" y1="50" x2="80" y2="150" stroke="#0284c7" strokeWidth="2" opacity="0.6"/>
-      <line x1="80" y1="150" x2="150" y2="100" stroke="#22c55e" strokeWidth="1.5" opacity="0.5"/>
-      
-      {/* Atoms */}
-      <circle cx="50" cy="50" r="8" fill="url(#glowGreen)" filter="url(#glow)"/>
-      <circle cx="150" cy="100" r="10" fill="url(#glowCyan)" filter="url(#glow)"/>
-      <circle cx="120" cy="170" r="7" fill="url(#glowGreen)" filter="url(#glow)"/>
-      <circle cx="80" cy="150" r="8" fill="url(#glowCyan)" filter="url(#glow)"/>
-      <circle cx="100" cy="80" r="6" fill="url(#glowGreen)" filter="url(#glow)" opacity="0.7"/>
-    </svg>
+    <div className="relative w-full h-full min-h-32 flex items-center justify-center">
+      <svg viewBox="0 0 200 200" className="w-full h-full" style={{filter: 'drop-shadow(0 0 20px rgba(6, 182, 212, 0.6))'}}>
+        {/* Bonds */}
+        <line x1="60" y1="60" x2="140" y2="100" stroke="#06b6d4" strokeWidth="3" opacity="0.7"/>
+        <line x1="140" y1="100" x2="100" y2="160" stroke="#10b981" strokeWidth="3" opacity="0.7"/>
+        <line x1="60" y1="60" x2="100" y2="160" stroke="#06b6d4" strokeWidth="2" opacity="0.5"/>
+        
+        {/* Atoms - Cyan */}
+        <circle cx="60" cy="60" r="12" fill="#06b6d4" opacity="0.9"/>
+        <circle cx="60" cy="60" r="12" fill="none" stroke="#06b6d4" strokeWidth="2" opacity="0.4"/>
+        
+        {/* Atoms - Green */}
+        <circle cx="140" cy="100" r="14" fill="#10b981" opacity="0.9"/>
+        <circle cx="140" cy="100" r="14" fill="none" stroke="#10b981" strokeWidth="2" opacity="0.4"/>
+        
+        {/* Atoms - Cyan */}
+        <circle cx="100" cy="160" r="12" fill="#06b6d4" opacity="0.9"/>
+        <circle cx="100" cy="160" r="12" fill="none" stroke="#06b6d4" strokeWidth="2" opacity="0.4"/>
+      </svg>
+    </div>
   );
 }
 
-// Animated antibody illustration
-function AntibodyVisualization({ className = "" }) {
+// Antibody Y-shape
+function AntibodyVisualization() {
   return (
-    <svg viewBox="0 0 180 220" className={`w-full h-full ${className}`}>
-      <defs>
-        <radialGradient id="antibodyGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#10b981" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="#059669" stopOpacity="0.2" />
-        </radialGradient>
-        <filter id="antibodyFilter">
-          <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-          <feMerge>
-            <feMergeNode in="coloredBlur"/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
-        </filter>
-      </defs>
-      
-      {/* Y-shaped antibody structure */}
-      {/* Left arm */}
-      <circle cx="40" cy="60" r="12" fill="url(#antibodyGlow)" filter="url(#antibodyFilter)"/>
-      <path d="M 40 72 Q 35 110 30 150" stroke="#10b981" strokeWidth="8" fill="none" opacity="0.7"/>
-      <circle cx="30" cy="160" r="10" fill="url(#antibodyGlow)" filter="url(#antibodyFilter)"/>
-      
-      {/* Right arm */}
-      <circle cx="140" cy="60" r="12" fill="url(#antibodyGlow)" filter="url(#antibodyFilter)"/>
-      <path d="M 140 72 Q 145 110 150 150" stroke="#10b981" strokeWidth="8" fill="none" opacity="0.7"/>
-      <circle cx="150" cy="160" r="10" fill="url(#antibodyGlow)" filter="url(#antibodyFilter)"/>
-      
-      {/* Center stem */}
-      <path d="M 90 80 L 90 140" stroke="#06b6d4" strokeWidth="10" opacity="0.6"/>
-      <circle cx="90" cy="150" r="12" fill="url(#antibodyGlow)" filter="url(#antibodyFilter)"/>
-      
-      {/* Central joint */}
-      <circle cx="90" cy="80" r="14" fill="url(#antibodyGlow)" filter="url(#antibodyFilter)"/>
-    </svg>
+    <div className="relative w-full h-full min-h-32 flex items-center justify-center">
+      <svg viewBox="0 0 180 240" className="w-full h-full" style={{filter: 'drop-shadow(0 0 20px rgba(16, 185, 129, 0.6))'}}>
+        {/* Y-shaped antibody */}
+        {/* Left arm */}
+        <path d="M 50 80 Q 40 130 30 180" stroke="#10b981" strokeWidth="6" fill="none" opacity="0.8"/>
+        <circle cx="30" cy="180" r="10" fill="#10b981" opacity="0.9"/>
+        
+        {/* Right arm */}
+        <path d="M 130 80 Q 140 130 150 180" stroke="#10b981" strokeWidth="6" fill="none" opacity="0.8"/>
+        <circle cx="150" cy="180" r="10" fill="#10b981" opacity="0.9"/>
+        
+        {/* Center stem */}
+        <path d="M 90 80 L 90 160" stroke="#06b6d4" strokeWidth="8" opacity="0.7"/>
+        <circle cx="90" cy="160" r="11" fill="#06b6d4" opacity="0.9"/>
+        
+        {/* Head */}
+        <circle cx="90" cy="60" r="16" fill="#10b981" opacity="0.9"/>
+        <circle cx="90" cy="60" r="16" fill="none" stroke="#10b981" strokeWidth="2" opacity="0.4"/>
+      </svg>
+    </div>
   );
 }
 
-// Compound structure
-function CompoundVisualization({ className = "" }) {
+// Compound structure - rings
+function CompoundVisualization() {
   return (
-    <svg viewBox="0 0 160 160" className={`w-full h-full ${className}`}>
-      <defs>
-        <radialGradient id="compoundGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.8" />
-          <stop offset="100%" stopColor="#d97706" stopOpacity="0.2" />
-        </radialGradient>
-        <filter id="compoundFilter">
-          <feGaussianBlur stdDeviation="2"/>
-          <feMerge>
-            <feMergeNode/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
-        </filter>
-      </defs>
-      
-      {/* Hexagon ring structure */}
-      <polygon points="80,20 110,35 110,65 80,80 50,65 50,35" 
-               stroke="#f59e0b" strokeWidth="2" fill="none" opacity="0.5"/>
-      <polygon points="80,100 110,115 110,145 80,160 50,145 50,115" 
-               stroke="#06b6d4" strokeWidth="2" fill="none" opacity="0.5"/>
-      
-      {/* Connection */}
-      <line x1="80" y1="80" x2="80" y2="100" stroke="#60a5fa" strokeWidth="2" opacity="0.6"/>
-      
-      {/* Atoms */}
-      <circle cx="80" cy="50" r="6" fill="url(#compoundGlow)" filter="url(#compoundFilter)"/>
-      <circle cx="100" cy="60" r="5" fill="url(#compoundGlow)" filter="url(#compoundFilter)"/>
-      <circle cx="80" cy="130" r="6" fill="url(#compoundGlow)" filter="url(#compoundFilter)"/>
-      <circle cx="65" cy="100" r="5" fill="url(#compoundGlow)" filter="url(#compoundFilter)"/>
-    </svg>
+    <div className="relative w-full h-full min-h-32 flex items-center justify-center">
+      <svg viewBox="0 0 180 180" className="w-full h-full" style={{filter: 'drop-shadow(0 0 20px rgba(249, 158, 11, 0.6))'}}>
+        {/* Top hexagon ring */}
+        <polygon points="90,30 130,55 130,105 90,130 50,105 50,55" stroke="#f59e0b" strokeWidth="3" fill="none" opacity="0.7"/>
+        
+        {/* Bottom hexagon ring */}
+        <polygon points="90,110 130,135 130,185 90,210 50,185 50,135" stroke="#06b6d4" strokeWidth="3" fill="none" opacity="0.7"/>
+        
+        {/* Connection bridge */}
+        <line x1="90" y1="130" x2="90" y2="110" stroke="#f59e0b" strokeWidth="2" opacity="0.8"/>
+        
+        {/* Atoms - on rings */}
+        <circle cx="90" cy="30" r="8" fill="#f59e0b" opacity="0.9"/>
+        <circle cx="130" cy="80" r="7" fill="#f59e0b" opacity="0.8"/>
+        <circle cx="90" cy="110" r="8" fill="#06b6d4" opacity="0.9"/>
+        <circle cx="65" cy="145" r="7" fill="#06b6d4" opacity="0.8"/>
+      </svg>
+    </div>
   );
 }
 
@@ -211,14 +173,14 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-6">
-            <div className="md:col-span-2 bg-gradient-to-br from-blue-900/40 to-cyan-900/30 p-6 rounded-xl border border-blue-700/50 backdrop-blur-sm hover:border-blue-500/80 transition">
+          <div className="grid grid-cols-3 gap-4">
+            <div className="col-span-2 md:row-span-2 bg-gradient-to-br from-blue-900/40 to-cyan-900/40 p-8 rounded-xl border border-blue-500/30 backdrop-blur">
               <MoleculeVisualization />
             </div>
-            <div className="bg-gradient-to-br from-green-900/40 to-emerald-900/30 p-6 rounded-xl border border-green-700/50 backdrop-blur-sm hover:border-green-500/80 transition">
+            <div className="bg-gradient-to-br from-green-900/40 to-emerald-900/40 p-6 rounded-xl border border-green-500/30 backdrop-blur">
               <AntibodyVisualization />
             </div>
-            <div className="bg-gradient-to-br from-amber-900/40 to-orange-900/30 p-6 rounded-xl border border-amber-700/50 backdrop-blur-sm hover:border-amber-500/80 transition">
+            <div className="bg-gradient-to-br from-amber-900/40 to-orange-900/40 p-6 rounded-xl border border-amber-500/30 backdrop-blur">
               <CompoundVisualization />
             </div>
           </div>
@@ -236,8 +198,8 @@ export default function Home() {
             ].map((stat, i) => (
               <div key={i} className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg blur-xl group-hover:from-blue-500/20 group-hover:to-cyan-500/20 transition opacity-0 group-hover:opacity-100"></div>
-                <div className="relative bg-slate-900/60 backdrop-blur p-8 rounded-lg border border-slate-700/50 group-hover:border-blue-500/50 transition text-center">
-                  <div className="w-20 h-20 mx-auto mb-4 opacity-60 group-hover:opacity-100 transition">
+                <div className="relative bg-slate-900/60 backdrop-blur p-8 rounded-lg border border-slate-700/50 group-hover:border-blue-500/50 transition">
+                  <div className="h-28 mb-6">
                     {stat.icon === 'molecule' && <MoleculeVisualization />}
                     {stat.icon === 'compound' && <CompoundVisualization />}
                     {stat.icon === 'antibody' && <AntibodyVisualization />}
@@ -277,25 +239,16 @@ export default function Home() {
               icon: "molecule"
             }
           ].map((capability, i) => (
-            <div key={i} className="group bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-xl border border-slate-700 hover:border-blue-500/50 transition overflow-hidden relative">
-              {/* Background visualization */}
-              <div className="absolute -right-20 -top-20 w-40 h-40 opacity-5 group-hover:opacity-10 transition">
+            <div key={i} className="group bg-gradient-to-br from-slate-800/60 to-slate-900/60 p-8 rounded-xl border border-slate-700 hover:border-blue-500/50 transition overflow-hidden relative backdrop-blur">
+              {/* Icon area */}
+              <div className="h-32 mb-6 rounded-lg bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-500/20 p-4">
                 {capability.icon === 'molecule' && <MoleculeVisualization />}
                 {capability.icon === 'compound' && <CompoundVisualization />}
                 {capability.icon === 'antibody' && <AntibodyVisualization />}
               </div>
               
-              <div className="relative z-10">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-lg mb-4 flex items-center justify-center border border-blue-500/30">
-                  <div className="w-12 h-12">
-                    {capability.icon === 'molecule' && <MoleculeVisualization />}
-                    {capability.icon === 'compound' && <CompoundVisualization />}
-                    {capability.icon === 'antibody' && <AntibodyVisualization />}
-                  </div>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-4">{capability.title}</h3>
-                <p className="text-slate-400 leading-relaxed">{capability.description}</p>
-              </div>
+              <h3 className="text-xl font-bold text-white mb-4">{capability.title}</h3>
+              <p className="text-slate-400 leading-relaxed">{capability.description}</p>
             </div>
           ))}
         </div>
@@ -314,8 +267,8 @@ export default function Home() {
               { title: "Enterprise Scale", desc: "Built for large-scale operations and complex R&D portfolios", icon: "compound" },
               { title: "Confidential", desc: "Secure, private infrastructure for sensitive research data", icon: "antibody" }
             ].map((item, i) => (
-              <div key={i} className="group p-6 rounded-xl bg-gradient-to-br from-slate-700/30 to-slate-800/30 border border-slate-600/50 hover:border-blue-500/50 transition">
-                <div className="w-16 h-16 mx-auto mb-4 opacity-50 group-hover:opacity-100 transition">
+              <div key={i} className="group p-6 rounded-xl bg-gradient-to-br from-slate-700/40 to-slate-800/40 border border-slate-600/50 hover:border-blue-500/50 transition backdrop-blur">
+                <div className="h-24 mb-4 rounded-lg bg-gradient-to-br from-green-900/20 to-emerald-900/20 p-3">
                   {item.icon === 'molecule' && <MoleculeVisualization />}
                   {item.icon === 'compound' && <CompoundVisualization />}
                   {item.icon === 'antibody' && <AntibodyVisualization />}
@@ -332,10 +285,10 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-12 text-center">
           {/* Background molecules */}
-          <div className="absolute -right-32 -top-32 w-64 h-64 opacity-10">
+          <div className="absolute -right-24 -top-24 w-64 h-64 opacity-10 pointer-events-none">
             <MoleculeVisualization />
           </div>
-          <div className="absolute -left-20 -bottom-20 w-40 h-40 opacity-10">
+          <div className="absolute -left-16 -bottom-16 w-48 h-48 opacity-10 pointer-events-none">
             <CompoundVisualization />
           </div>
           
