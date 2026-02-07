@@ -1,5 +1,33 @@
 import React from 'react';
 
+// VHH Nanobody/Ligand - compact single domain
+function VHHVisualization() {
+  return (
+    <div className="relative w-full h-full min-h-32 flex items-center justify-center">
+      <svg viewBox="0 0 180 180" className="w-full h-full" style={{filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.6))'}}>
+        {/* Compact domain structure */}
+        {/* Main barrel structure */}
+        <circle cx="90" cy="80" r="35" fill="none" stroke="#22c55e" strokeWidth="2" opacity="0.5"/>
+        
+        {/* Secondary structure elements */}
+        <path d="M 90 45 Q 110 65 110 85" stroke="#10b981" strokeWidth="3" fill="none" opacity="0.7"/>
+        <path d="M 90 45 Q 70 65 70 85" stroke="#10b981" strokeWidth="3" fill="none" opacity="0.7"/>
+        <path d="M 70 85 Q 70 105 90 120" stroke="#22c55e" strokeWidth="3" fill="none" opacity="0.7"/>
+        <path d="M 110 85 Q 110 105 90 120" stroke="#22c55e" strokeWidth="3" fill="none" opacity="0.7"/>
+        
+        {/* CDR regions - binding loops */}
+        <circle cx="90" cy="45" r="8" fill="#22c55e" opacity="0.9"/>
+        <circle cx="110" cy="80" r="7" fill="#10b981" opacity="0.9"/>
+        <circle cx="70" cy="80" r="7" fill="#10b981" opacity="0.9"/>
+        <circle cx="90" cy="120" r="8" fill="#22c55e" opacity="0.9"/>
+        
+        {/* Ligand binding site indicator */}
+        <circle cx="90" cy="80" r="5" fill="#06b6d4" opacity="0.8"/>
+      </svg>
+    </div>
+  );
+}
+
 // Simple molecule visualization with glowing atoms
 function MoleculeVisualization() {
   return (
@@ -152,9 +180,9 @@ export default function Home() {
 
       {/* Hero Section with Visuals */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="inline-block mb-4 px-4 py-2 bg-blue-500/10 border border-blue-400/30 rounded-full">
+        <div className="grid md:grid-cols-2 gap-12 items-stretch">
+          <div className="flex flex-col justify-center">
+            <div className="inline-block mb-4 px-4 py-2 bg-blue-500/10 border border-blue-400/30 rounded-full w-fit">
               <span className="text-blue-400 text-sm font-semibold">AI-Enabled Biotech</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
@@ -173,7 +201,7 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-4 h-full">
             <div className="col-span-2 md:row-span-2 bg-gradient-to-br from-blue-900/40 to-cyan-900/40 p-8 rounded-xl border border-blue-500/30 backdrop-blur">
               <MoleculeVisualization />
             </div>
@@ -198,8 +226,8 @@ export default function Home() {
             ].map((stat, i) => (
               <div key={i} className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg blur-xl group-hover:from-blue-500/20 group-hover:to-cyan-500/20 transition opacity-0 group-hover:opacity-100"></div>
-                <div className="relative bg-slate-900/60 backdrop-blur p-8 rounded-lg border border-slate-700/50 group-hover:border-blue-500/50 transition">
-                  <div className="h-28 mb-6">
+                <div className="relative bg-slate-900/60 backdrop-blur p-8 rounded-lg border border-slate-700/50 group-hover:border-blue-500/50 transition text-center">
+                  <div className="h-28 mb-6 flex items-center justify-center">
                     {stat.icon === 'molecule' && <MoleculeVisualization />}
                     {stat.icon === 'compound' && <CompoundVisualization />}
                     {stat.icon === 'antibody' && <AntibodyVisualization />}
@@ -224,9 +252,9 @@ export default function Home() {
               icon: "molecule"
             },
             {
-              title: "Accelerated Compound Screening",
-              description: "Machine learning models predict efficacy and safety profiles, dramatically narrowing candidate pools.",
-              icon: "compound"
+              title: "Accelerated Candidate Selection",
+              description: "AI-powered antibody and VHH ligand screening for optimal binding and potency profiles.",
+              icon: "vhh"
             },
             {
               title: "Real-Time Data Integration",
@@ -239,12 +267,13 @@ export default function Home() {
               icon: "molecule"
             }
           ].map((capability, i) => (
-            <div key={i} className="group bg-gradient-to-br from-slate-800/60 to-slate-900/60 p-8 rounded-xl border border-slate-700 hover:border-blue-500/50 transition overflow-hidden relative backdrop-blur">
+            <div key={i} className="group bg-gradient-to-br from-slate-800/60 to-slate-900/60 p-8 rounded-xl border border-slate-700 hover:border-blue-500/50 transition overflow-hidden relative backdrop-blur\">
               {/* Icon area */}
-              <div className="h-32 mb-6 rounded-lg bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-500/20 p-4">
+              <div className=\"h-32 mb-6 rounded-lg bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-500/20 p-4 flex items-center justify-center\">
                 {capability.icon === 'molecule' && <MoleculeVisualization />}
                 {capability.icon === 'compound' && <CompoundVisualization />}
                 {capability.icon === 'antibody' && <AntibodyVisualization />}
+                {capability.icon === 'vhh' && <VHHVisualization />}
               </div>
               
               <h3 className="text-xl font-bold text-white mb-4">{capability.title}</h3>
@@ -267,14 +296,14 @@ export default function Home() {
               { title: "Enterprise Scale", desc: "Built for large-scale operations and complex R&D portfolios", icon: "compound" },
               { title: "Confidential", desc: "Secure, private infrastructure for sensitive research data", icon: "antibody" }
             ].map((item, i) => (
-              <div key={i} className="group p-6 rounded-xl bg-gradient-to-br from-slate-700/40 to-slate-800/40 border border-slate-600/50 hover:border-blue-500/50 transition backdrop-blur">
-                <div className="h-24 mb-4 rounded-lg bg-gradient-to-br from-green-900/20 to-emerald-900/20 p-3">
+              <div key={i} className="group p-6 rounded-xl bg-gradient-to-br from-slate-700/40 to-slate-800/40 border border-slate-600/50 hover:border-blue-500/50 transition backdrop-blur text-center\">
+                <div className=\"h-24 mb-4 rounded-lg bg-gradient-to-br from-green-900/20 to-emerald-900/20 p-3 flex items-center justify-center\">
                   {item.icon === 'molecule' && <MoleculeVisualization />}
                   {item.icon === 'compound' && <CompoundVisualization />}
                   {item.icon === 'antibody' && <AntibodyVisualization />}
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-3">{item.title}</h3>
-                <p className="text-slate-400">{item.desc}</p>
+                <h3 className=\"text-lg font-semibold text-white mb-3\">{item.title}</h3>
+                <p className=\"text-slate-400\">{item.desc}</p>
               </div>
             ))}
           </div>
