@@ -4,69 +4,37 @@ import React from 'react';
 function CloudBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Animated SVG Clouds */}
-      <svg className="absolute w-full h-full" viewBox="0 0 1200 600" preserveAspectRatio="none">
-        <defs>
-          <filter id="cloudGlow">
-            <feGaussianBlur stdDeviation="2" />
-            <feComponentTransfer>
-              <feFuncA type="linear" slope="0.3"/>
-            </feComponentTransfer>
-          </filter>
-          <style>{`
-            @keyframes drift1 { 0%, 100% { transform: translateX(0px); } 50% { transform: translateX(30px); } }
-            @keyframes drift2 { 0%, 100% { transform: translateX(0px); } 50% { transform: translateX(-40px); } }
-            @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(15px); } }
-            .cloud1 { animation: drift1 20s ease-in-out infinite, float 8s ease-in-out infinite; }
-            .cloud2 { animation: drift2 25s ease-in-out infinite, float 10s ease-in-out infinite 2s; }
-          `}</style>
-        </defs>
-        
-        {/* Top clouds */}
-        <g className="cloud1" opacity="0.15">
-          <ellipse cx="200" cy="100" rx="80" ry="40" fill="#60a5fa"/>
-          <ellipse cx="260" cy="90" rx="90" ry="45" fill="#60a5fa"/>
-          <ellipse cx="140" cy="95" rx="70" ry="35" fill="#60a5fa"/>
-        </g>
-        
-        <g className="cloud2" opacity="0.12">
-          <ellipse cx="800" cy="150" rx="100" ry="50" fill="#06b6d4"/>
-          <ellipse cx="880" cy="140" rx="110" ry="55" fill="#06b6d4"/>
-          <ellipse cx="720" cy="145" rx="85" ry="40" fill="#06b6d4"/>
-        </g>
+      {/* Floating clouds using HTML/CSS */}
+      <div className="absolute top-20 left-10 w-32 h-16 bg-gradient-to-r from-blue-300 to-cyan-300 rounded-full opacity-20 blur-3xl animate-pulse" style={{ animation: 'drift 20s ease-in-out infinite' }}></div>
+      <div className="absolute top-40 right-20 w-40 h-20 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full opacity-15 blur-3xl" style={{ animation: 'drift-reverse 25s ease-in-out infinite' }}></div>
+      <div className="absolute top-1/2 left-1/4 w-36 h-18 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full opacity-10 blur-3xl" style={{ animation: 'drift 30s ease-in-out infinite' }}></div>
+      <div className="absolute bottom-40 right-1/3 w-48 h-24 bg-gradient-to-r from-cyan-300 to-blue-300 rounded-full opacity-12 blur-3xl" style={{ animation: 'drift-reverse 22s ease-in-out infinite' }}></div>
 
-        {/* Mid-level clouds */}
-        <g className="cloud1" opacity="0.2">
-          <ellipse cx="100" cy="300" rx="90" ry="45" fill="#0284c7"/>
-          <ellipse cx="180" cy="290" rx="100" ry="50" fill="#0284c7"/>
-          <ellipse cx="20" cy="295" rx="75" ry="38" fill="#0284c7"/>
-        </g>
-
-        <g className="cloud2" opacity="0.18">
-          <ellipse cx="900" cy="350" rx="95" ry="48" fill="#0ea5e9"/>
-          <ellipse cx="990" cy="340" rx="105" ry="52" fill="#0ea5e9"/>
-          <ellipse cx="820" cy="345" rx="80" ry="40" fill="#0ea5e9"/>
-        </g>
-      </svg>
-
-      {/* Drug development simulation particles */}
+      {/* Drug development simulation - glowing particles */}
       <div className="absolute inset-0">
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full blur-sm"
-            style={{
-              width: Math.random() * 4 + 2 + 'px',
-              height: Math.random() * 4 + 2 + 'px',
-              left: Math.random() * 100 + '%',
-              top: Math.random() * 100 + '%',
-              background: `hsl(${180 + Math.random() * 60}, 100%, 50%)`,
-              animation: `moleculeMove ${Math.random() * 8 + 12}s ease-in infinite`,
-              animationDelay: `${Math.random() * 5}s`,
-              opacity: 0,
-            }}
-          />
-        ))}
+        {[...Array(20)].map((_, i) => {
+          const delay = Math.random() * 10;
+          const duration = Math.random() * 6 + 8;
+          const startX = Math.random() * 100;
+          const startY = Math.random() * 60 + 20;
+          
+          return (
+            <div
+              key={i}
+              className="absolute rounded-full"
+              style={{
+                width: Math.random() * 6 + 3 + 'px',
+                height: Math.random() * 6 + 3 + 'px',
+                left: startX + '%',
+                top: startY + '%',
+                background: `radial-gradient(circle, hsl(${Math.random() * 60 + 180}, 100%, 60%), hsl(${Math.random() * 60 + 180}, 100%, 30%))`,
+                boxShadow: `0 0 ${Math.random() * 8 + 4}px hsl(${Math.random() * 60 + 180}, 100%, 60%)`,
+                animation: `moleculeFloat ${duration}s ease-in infinite`,
+                animationDelay: `${delay}s`,
+              }}
+            />
+          );
+        })}
       </div>
     </div>
   );
@@ -76,15 +44,19 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
       <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
+        @keyframes drift {
+          0%, 100% { transform: translateX(0px) translateY(0px); }
+          50% { transform: translateX(20px) translateY(-10px); }
         }
-        @keyframes moleculeMove {
-          0% { transform: translate(0, 0) scale(1); opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { transform: translate(100px, -150px) scale(0.8); opacity: 0; }
+        @keyframes drift-reverse {
+          0%, 100% { transform: translateX(0px) translateY(0px); }
+          50% { transform: translateX(-30px) translateY(10px); }
+        }
+        @keyframes moleculeFloat {
+          0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+          10% { opacity: 0.8; }
+          90% { opacity: 0.8; }
+          100% { transform: translate(50px, -200px) scale(1); opacity: 0; }
         }
       `}</style>
       <CloudBackground />
